@@ -66,18 +66,13 @@ func main() {
 			return
 		}
 
-		var fileType string
-
-		if size == "origin" {
-			// 获取原图
-			fileType = "pictrue"
-		} else if size == "thumbnail" {
-			// 获取缩略图
-			fileType = "pictruethumbnail"
-		} else {
+		// 尺寸不对
+		if size != "origin" && size != "thumbnail" {
 			http.NotFound(c.Writer, c.Request)
 			return
 		}
+
+		fileType := size
 
 		absFilePath := path.Join("./upload", fileType, file)
 
